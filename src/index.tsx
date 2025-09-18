@@ -11,6 +11,7 @@ import { CountryProvider, DEFAULT_COUNTRY_CONTEXT } from './CountryContext'
 import { ThemeProvider, DEFAULT_THEME, Theme } from './CountryTheme'
 import { CountryFilterProps } from './CountryFilter'
 import { StyleProp, ViewStyle, ModalProps, FlatListProps } from 'react-native'
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { CountryPicker } from './CountryPicker'
 
 interface Props {
@@ -52,9 +53,11 @@ interface Props {
 const Main = ({ theme, translation, ...props }: Props) => {
   return (
     <ThemeProvider theme={{ ...DEFAULT_THEME, ...theme }}>
-      <CountryProvider value={{ ...DEFAULT_COUNTRY_CONTEXT, translation }}>
-        <CountryPicker {...props} />
-      </CountryProvider>
+      <SafeAreaProvider>
+        <CountryProvider value={{ ...DEFAULT_COUNTRY_CONTEXT, translation }}>
+          <CountryPicker {...props} />
+        </CountryProvider>
+      </SafeAreaProvider>
     </ThemeProvider>
   )
 }
